@@ -162,22 +162,19 @@ export function unregister() {
 }
 
 /* eslint-disable-next-line no-restricted-globals */
-self.onmessage = (e:MessageEvent) => {
-  console.log("sarasa")
-  if (e.data=="message"){
-    // @ts-ignore
-    console.log(e.target?.value)
-    showNotification()
-    /* eslint-disable-next-line no-restricted-globals */
-    // postMessage('result','result');
-  }
-}
+//self.onmessage = (e:MessageEvent) => {
+//  console.log("sarasa")
+//  if (e.data=="message"){
+//    // @ts-ignore
+//    console.log(e.target?.value)
+//    showNotification()
+//    /* eslint-disable-next-line no-restricted-globals */
+//    // postMessage('result','result');
+//  }
+//}
 /* eslint-disable-next-line no-restricted-globals */
-self.addEventListener(
-    "message",
-    function(e) {
+navigator.serviceWorker.addEventListener("message", function(e) {
       console.log("lalal",e);
       showNotification()
-    },
-    false
+    }
 );
