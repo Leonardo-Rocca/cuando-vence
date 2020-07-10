@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es-ES" id="html">
+<head>
+
+<link rel="canonical" href="https://leonardo-rocca.github.io/cuando-vence/" />
+<meta http-equiv="Cache-Control" content="max-age=3600">
+<link rel="manifest" href="manifest.json">
+
+<title>Cuando vence - App para ver cuando vencen los productos</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cuando vence. App para crear equipos. equipos parejos. aplicacion. fútbol. generar equipos al azar. Generar grupos. Gratis. amigos. compañeros. juegos de mesa. Juegos">
+<meta name="author" content="Leonardo Rocca">
+<meta name="keywords" content="armar equipos,generar grupos,app,equipos parejos,equipos al azar">
+
+ <link rel="icon" href="demo_icon.gif" type="image/gif" sizes="16x16">
+ <meta name="theme-color" content="#ffffff">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Teams PWA">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta name="msapplication-TileImage" content="logo.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+
+</head>
+<body>
+
+  <script>
+
+    //redirect index.html
+    var url_string = window.location.href;
+    if (url_string.search("#")==-1 )
+      window.location.replace("https://leonardo-rocca.github.io/cuando-vence/build");
+
+  </script>
+
+  <script>
+  // if ('serviceWorker' in navigator) {
+  //   window.addEventListener('load', function () {
+  //     navigator.serviceWorker.register('sw.js').then(function (registration) {
+  //       // Registration was successful
+  //       console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  //     }).catch(function (err) {
+  //       // registration failed :(
+  //       console.log('ServiceWorker registration failed: ', err);
+  //     });
+  //   });
+  // }
+  </script>
+
+</body>
+</html>
