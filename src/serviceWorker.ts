@@ -117,11 +117,10 @@ function registerValidSW(swUrl: string, config?: Config) {
     })
     .catch(error => {
       console.error('Error during service worker registration:', error);
-    }).then(()=>      navigator.serviceWorker.addEventListener("message", function(e) {
-            console.log("lalal77777",e);
-            showNotification()
-          }
-      )
+    }).then(()=> {
+        console.log("lalal77777");
+        showNotification()
+      }
 
   );
 
