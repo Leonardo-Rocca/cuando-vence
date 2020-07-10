@@ -171,18 +171,15 @@ export function unregister() {
 }
 
 /* eslint-disable-next-line no-restricted-globals */
-self.addEventListener("message", function(e) {
+self.addEventListener("push", function(e) {
   console.log("lalal888",e);
   showNotification()
 })
 
 /* eslint-disable-next-line no-restricted-globals */
-addEventListener('message', (event) => {
+addEventListener('push', (event) => {
   console.log("lalal9999",event);
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    // @ts-ignore
-    skipWaiting();
-  }
+
 });
 
 

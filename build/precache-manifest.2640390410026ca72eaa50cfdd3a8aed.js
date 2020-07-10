@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "99f1cf893719e562706b10e602eefa8b",
+    "revision": "18ca6ea61c1864ba09ad165664fb8c87",
     "url": "/cuando-vence/build/index.html"
   },
   {
-    "revision": "5c3371210c6db388e17d",
+    "revision": "9601cb989fe49201f0d2",
     "url": "/cuando-vence/build/static/css/main.5f361e03.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cuando-vence/build/static/js/2.398704eb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5c3371210c6db388e17d",
-    "url": "/cuando-vence/build/static/js/main.169c3713.chunk.js"
+    "revision": "9601cb989fe49201f0d2",
+    "url": "/cuando-vence/build/static/js/main.0bbfc05c.chunk.js"
   },
   {
     "revision": "45090c37715343674621",
