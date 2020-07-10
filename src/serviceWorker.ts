@@ -177,6 +177,17 @@ self.addEventListener("message", function(e) {
   showNotification()
 })
 
+/* eslint-disable-next-line no-restricted-globals */
+addEventListener('message', (event) => {
+  console.log("lalal9999",event);
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    // @ts-ignore
+    skipWaiting();
+  }
+});
+
+
+
 //self.onmessage = (e:MessageEvent) => {
 //  console.log("sarasa")
 //  if (e.data=="message"){
