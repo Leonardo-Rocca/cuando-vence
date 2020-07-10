@@ -22,9 +22,9 @@ async function askUserPermission() {
 }
 
 export default ()=>{
-    const [notificationWorker,setWorker]:[Worker,any] = useState(new Worker('../nootificationWorker'))
+    const [notificationWorker,setWorker]:[Worker,any] = useState(new Worker(noti))
     useEffect(()=>{askUserPermission()},[])
-    useEffect(()=>  setWorker(new Worker( '../nootificationWorker'))  ,[])
+    useEffect(()=>  setWorker(new Worker( noti))  ,[])
   //  notificationWorker.addEventListener('result',(msg)=>log())
 
     const classes = useStyles();
@@ -42,6 +42,6 @@ export default ()=>{
         </AppBar>
         <br/>
         <Button variant="contained" color="primary" onClick={clickSendNotification} > Show Notif after 3 seconds</Button>
-        v8
+        v9
         </>
 }
