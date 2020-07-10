@@ -1,6 +1,6 @@
-import logo from '../logo.svg';
+import logo from '../logo192.png';
 const text = "Take a look at this brand new t-shirt!";
-const title = "New Product Available";
+const title = "New Product near to expire";
 const options = {
     body: text,
     icon: logo,
@@ -15,5 +15,9 @@ const options = {
 
 
 export const showNotification =()=>navigator.serviceWorker.ready.then(function(serviceWorker) {
-    serviceWorker.showNotification(title, options);
+    setTimeout(() => {
+        serviceWorker.showNotification(title, options);
+        console.log("sent")
+    }, 3000)
 });
+export const log=()=>        alert("sent")
