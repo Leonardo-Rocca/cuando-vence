@@ -28,10 +28,12 @@ export default ()=>{
 
     const classes = useStyles();
     let clickSendNotification = ()=>navigator.serviceWorker.controller?.postMessage('notify') //notificationWorker.postMessage("notify");
-
+    console.log(navigator.serviceWorker.controller)
     navigator.serviceWorker.addEventListener('message', event => {
         showNotification()
+        console.log("alal2")
     });
+    console.log("v2")
 
     return  <>
         <AppBar position="static"> <Typography variant="h6" className={classes.title} >
@@ -39,5 +41,6 @@ export default ()=>{
             </Typography>
         </AppBar>
         <Button onClick={clickSendNotification} > Show Notif after 3 seconds</Button>
+        v2
         </>
 }
