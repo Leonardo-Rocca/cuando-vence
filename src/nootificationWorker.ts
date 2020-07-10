@@ -15,22 +15,25 @@ const options = {
 
 const workercode = () => {
     console.log("w created")
-     const showNotification = () => navigator.serviceWorker.ready.then(function (serviceWorker) {
-        setTimeout(() => {
-            serviceWorker.showNotification(title, options).then(() => console.log("sended"))
-        }, 3000)
-    });
+     const showNotification = () => {
+        console.log("w w show");
+        console.log(navigator.serviceWorker);
+        console.log(navigator.serviceWorker.controller)
+
+         navigator.serviceWorker.ready.then(function (serviceWorker) {
+             setTimeout(() => {
+                 serviceWorker.showNotification(title, options).then(() => console.log("sended"))
+             }, 3000)
+         });
+     }
 
     /* eslint-disable-next-line no-restricted-globals */
     self.onmessage = (e:MessageEvent) => {
-        if (e.data=="notify"){
-            // @ts-ignore
-            console.log(e.target?.value)
-            showNotification()
-            /* eslint-disable-next-line no-restricted-globals */
-           // postMessage('result','result');
-        }
+        console.log(e)
+        console.log("w w on msg");
 
+        showNotification()
+        /* eslint-disable-next-line no-restricted-globals */// postMessage('result','result');
     }
         //  self.addEventListener(
         //    "notify",

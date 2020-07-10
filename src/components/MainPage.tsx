@@ -22,22 +22,26 @@ async function askUserPermission() {
 }
 
 export default ()=>{
-    const [notificationWorker,setWorker]:[Worker,any] = useState(new Worker(noti))
-    useEffect(()=>{askUserPermission()},[])//setWorker(new Worker(URL.createObjectURL(worker.toString()))),[])
-    notificationWorker.addEventListener('result',(msg)=>log())
+    const [notificationWorker,setWorker]:[Worker,any] = useState(new Worker('../nootificationWorker'))
+    useEffect(()=>{askUserPermission()},[])
+    useEffect(()=>  setWorker(new Worker( '../nootificationWorker'))  ,[])
+  //  notificationWorker.addEventListener('result',(msg)=>log())
 
     const classes = useStyles();
     let clickSendNotification = ()=>{
         console.log(navigator.serviceWorker.controller)
         navigator.serviceWorker.controller?.postMessage({opCode:'message'})
-    } //notificationWorker.postMessage("notify");
+    }
+     clickSendNotification = ()=>notificationWorker.postMessage({type:"notify"});
+//     clickSendNotification = ()=>console.log({type:"notify",w:navigator.serviceWorker.ready});
 
     return  <>
         <AppBar position="static"> <Typography variant="h6" className={classes.title} >
             Cuando vence
             </Typography>
         </AppBar>
+        <br/>
         <Button variant="contained" color="primary" onClick={clickSendNotification} > Show Notif after 3 seconds</Button>
-        v7
+        v8
         </>
 }
