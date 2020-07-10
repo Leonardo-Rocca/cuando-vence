@@ -38,6 +38,7 @@ export default ()=>{
         navigator.serviceWorker.ready.then(function(reg) {
 
             reg.pushManager.subscribe({
+                applicationServerKey:"BGNFTJy7-RHmBkIJsqzRIyIv4Z2qPoChB7A2Wqzmi_n8zMVxzcPSy1ksrgha3CFma8JCqX4AfJ6W4_BTZDRjST8",
                 userVisibleOnly: true
             }).then(function(sub) {
                 console.log('Endpoint URL: ', sub.endpoint);
