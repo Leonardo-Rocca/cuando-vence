@@ -18,7 +18,7 @@ import {log, showNotification} from "../containers/AppNotification";
         }),
     );
 async function askUserPermission() {
-    return await Notification.requestPermission();
+    return await Notification.requestPermission().then(console.log);
 }
 
 export default ()=>{
@@ -34,6 +34,23 @@ export default ()=>{
     }
 //     clickSendNotification = ()=>console.log({type:"notify",w:navigator.serviceWorker.ready});
 
+    function subscribeUser() {
+        navigator.serviceWorker.ready.then(function(reg) {
+
+            reg.pushManager.subscribe({
+                userVisibleOnly: true
+            }).then(function(sub) {
+                console.log('Endpoint URL: ', sub.endpoint);
+            }).catch(function(e) {
+                if (Notification.permission === 'denied') {
+                    console.warn('Permission for notifications was denied');
+                } else {
+                    console.error('Unable to subscribe to push', e);
+                }
+            });
+        })
+    }
+
     return  <>
         <AppBar position="static"> <Typography variant="h6" className={classes.title} >
             Cuando vence
@@ -42,5 +59,10 @@ export default ()=>{
         <br/>
         <Button variant="contained" color="primary" onClick={clickSendNotification} > Show Notif after 3 seconds</Button>
         v13
-        </>
+
+        <Button variant="contained" color="primary" onClick={subscribeUser} > subscribe User</Button>
+        <Button variant="contained" color="primary" onClick={()=>null} > Cancel suscription</Button>
+
+    </>
 }
+
