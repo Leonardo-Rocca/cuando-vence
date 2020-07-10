@@ -16,8 +16,9 @@ const options = {
 
 export const showNotification =()=>navigator.serviceWorker.ready.then(function(serviceWorker) {
     setTimeout(() => {
-        serviceWorker.showNotification(title, options);
         console.log("sent")
+
+        serviceWorker.showNotification(title, options);
     }, 3000)
 });
 export const log=()=>        alert("sent")

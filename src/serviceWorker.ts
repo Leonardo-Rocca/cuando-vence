@@ -10,6 +10,8 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
+import {showNotification} from "./containers/AppNotification";
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -148,3 +150,23 @@ export function unregister() {
       });
   }
 }
+
+/* eslint-disable-next-line no-restricted-globals */
+self.onmessage = (e:MessageEvent) => {
+  if (e.data=="message"){
+    // @ts-ignore
+    console.log(e.target?.value)
+    showNotification()
+    /* eslint-disable-next-line no-restricted-globals */
+    // postMessage('result','result');
+  }
+}
+/* eslint-disable-next-line no-restricted-globals */
+self.addEventListener(
+    "message",
+    function(e) {
+      console.log("lalal",e);
+      showNotification()
+    },
+    false
+);

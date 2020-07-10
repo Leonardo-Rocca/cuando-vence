@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {AppBar, Button, createStyles, Theme, Typography} from "@material-ui/core";
-import nootificationWorker from '../nootificationWorker'
+import noti from '../nootificationWorker'
 import {makeStyles} from "@material-ui/core/styles";
 import {log, showNotification} from "../containers/AppNotification";
 
@@ -17,13 +17,22 @@ import {log, showNotification} from "../containers/AppNotification";
             },
         }),
     );
+async function askUserPermission() {
+    return await Notification.requestPermission();
+}
+
 export default ()=>{
-    const [notificationWorker,setWorker]:[Worker,any] = useState(new Worker(nootificationWorker))
- //   useEffect(()=>setWorker(new Worker(URL.createObjectURL(worker.toString()))),[])
+    const [notificationWorker,setWorker]:[Worker,any] = useState(new Worker(noti))
+    useEffect(()=>{askUserPermission()},[])//setWorker(new Worker(URL.createObjectURL(worker.toString()))),[])
     notificationWorker.addEventListener('result',(msg)=>log())
 
     const classes = useStyles();
-    let clickSendNotification = ()=>notificationWorker.postMessage("notify");
+    let clickSendNotification = ()=>navigator.serviceWorker.controller?.postMessage('notify') //notificationWorker.postMessage("notify");
+
+    navigator.serviceWorker.addEventListener('message', event => {
+        showNotification()
+    });
+
     return  <>
         <AppBar position="static"> <Typography variant="h6" className={classes.title} >
             Cuando vence
