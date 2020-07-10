@@ -76,6 +76,7 @@ export function register(config?: Config) {
 }
 
 function registerValidSW(swUrl: string, config?: Config) {
+  console.log("leo will register sw")
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
@@ -116,14 +117,16 @@ function registerValidSW(swUrl: string, config?: Config) {
     })
     .catch(error => {
       console.error('Error during service worker registration:', error);
-    });
+    }).then(()=>      navigator.serviceWorker.addEventListener("message", function(e) {
+            console.log("lalal77777",e);
+            showNotification()
+          }
+      )
 
-
-  navigator.serviceWorker.addEventListener("message", function(e) {
-        console.log("lalal77777",e);
-        showNotification()
-      }
   );
+
+
+
 }
 
 function checkValidServiceWorker(swUrl: string, config?: Config) {
@@ -169,6 +172,11 @@ export function unregister() {
 }
 
 /* eslint-disable-next-line no-restricted-globals */
+self.addEventListener("message", function(e) {
+  console.log("lalal888",e);
+  showNotification()
+})
+
 //self.onmessage = (e:MessageEvent) => {
 //  console.log("sarasa")
 //  if (e.data=="message"){
