@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/cuando-vence/build/static/css/main.5f361e03.chunk.css",
-    "main.js": "/cuando-vence/build/static/js/main.5e43946c.chunk.js",
-    "main.js.map": "/cuando-vence/build/static/js/main.5e43946c.chunk.js.map",
+    "main.js": "/cuando-vence/build/static/js/main.7cec4e23.chunk.js",
+    "main.js.map": "/cuando-vence/build/static/js/main.7cec4e23.chunk.js.map",
     "runtime-main.js": "/cuando-vence/build/static/js/runtime-main.c2fafced.js",
     "runtime-main.js.map": "/cuando-vence/build/static/js/runtime-main.c2fafced.js.map",
     "static/js/2.398704eb.chunk.js": "/cuando-vence/build/static/js/2.398704eb.chunk.js",
     "static/js/2.398704eb.chunk.js.map": "/cuando-vence/build/static/js/2.398704eb.chunk.js.map",
     "index.html": "/cuando-vence/build/index.html",
-    "precache-manifest.532125da92a4fccce2ea008a432b08f9.js": "/cuando-vence/build/precache-manifest.532125da92a4fccce2ea008a432b08f9.js",
+    "precache-manifest.6f51ccf053ac2a0ae11ec547915d422a.js": "/cuando-vence/build/precache-manifest.6f51ccf053ac2a0ae11ec547915d422a.js",
     "service-worker.js": "/cuando-vence/build/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/cuando-vence/build/static/css/main.5f361e03.chunk.css.map",
     "static/js/2.398704eb.chunk.js.LICENSE.txt": "/cuando-vence/build/static/js/2.398704eb.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.c2fafced.js",
     "static/js/2.398704eb.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.5e43946c.chunk.js"
+    "static/js/main.7cec4e23.chunk.js"
   ]
 }

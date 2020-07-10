@@ -17,10 +17,13 @@ const workercode = () => {
     console.log("w created")
      const showNotification = () => {
         console.log("w w show");
-        console.log(navigator.serviceWorker);
-        console.log(navigator.serviceWorker.controller)
+         /* eslint-disable-next-line no-restricted-globals */
+         console.log(self.navigator.serviceWorker);
+         /* eslint-disable-next-line no-restricted-globals */
+         console.log(self.navigator.serviceWorker.controller)
 
-         navigator.serviceWorker.ready.then(function (serviceWorker) {
+         /* eslint-disable-next-line no-restricted-globals */
+         self.navigator.serviceWorker.ready.then(function (serviceWorker) {
              setTimeout(() => {
                  serviceWorker.showNotification(title, options).then(() => console.log("sended"))
              }, 3000)
