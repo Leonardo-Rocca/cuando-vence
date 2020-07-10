@@ -27,8 +27,11 @@ export default ()=>{
     notificationWorker.addEventListener('result',(msg)=>log())
 
     const classes = useStyles();
-    let clickSendNotification = ()=>navigator.serviceWorker.controller?.postMessage('notify') //notificationWorker.postMessage("notify");
-    console.log(navigator.serviceWorker.controller)
+    let clickSendNotification = ()=>{
+        console.log(navigator.serviceWorker.controller)
+        navigator.serviceWorker.controller?.postMessage('notify')
+    } //notificationWorker.postMessage("notify");
+
     navigator.serviceWorker.addEventListener('message', event => {
         showNotification()
         console.log("alal2")
@@ -40,7 +43,7 @@ export default ()=>{
             Cuando vence
             </Typography>
         </AppBar>
-        <Button onClick={clickSendNotification} > Show Notif after 3 seconds</Button>
-        v2
+        <Button  color="primary" onClick={clickSendNotification} > Show Notif after 3 seconds</Button>
+        v3
         </>
 }

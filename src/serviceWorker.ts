@@ -153,6 +153,7 @@ export function unregister() {
 
 /* eslint-disable-next-line no-restricted-globals */
 self.onmessage = (e:MessageEvent) => {
+  console.log("sarasa")
   if (e.data=="message"){
     // @ts-ignore
     console.log(e.target?.value)
