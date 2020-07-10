@@ -11,13 +11,17 @@
  * See https://goo.gl/2aRDsh
  */
 
+import {showNotification} from "../src/containers/AppNotification";
+
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/cuando-vence/build/precache-manifest.d4c506d36323c9ca3c73eeeee32a72e7.js"
+  "/cuando-vence/build/precache-manifest.532125da92a4fccce2ea008a432b08f9.js"
 );
 
 self.addEventListener('message', (event) => {
+  console.log("lalal888",e);
+  showNotification()
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }

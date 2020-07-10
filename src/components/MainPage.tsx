@@ -31,7 +31,7 @@ export default ()=>{
     let clickSendNotification = ()=> {
         navigator.serviceWorker.controller?.postMessage({opCode: 'message'})
 
-        notificationWorker.postMessage({type: "notify"});
+      //  notificationWorker.postMessage({type: "notify"});
     }
 //     clickSendNotification = ()=>console.log({type:"notify",w:navigator.serviceWorker.ready});
 
@@ -42,6 +42,6 @@ export default ()=>{
         </AppBar>
         <br/>
         <Button variant="contained" color="primary" onClick={clickSendNotification} > Show Notif after 3 seconds</Button>
-        v10
+        v11
         </>
 }
