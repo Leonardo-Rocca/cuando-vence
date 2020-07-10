@@ -51,11 +51,21 @@ export function register(config?: Config) {
 
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
+        navigator.serviceWorker.ready.then((w) => {
           console.log(
             'This web app is being served cache-first by a service ' +
               'worker. To learn more, visit https://bit.ly/CRA-PWA'
           );
+          /* eslint-disable-next-line no-restricted-globals */
+          w.addEventListener(
+              "message",
+              function(e) {
+                console.log("lalal12312",e);
+                showNotification()
+              },
+              false
+          );
+
         });
       } else {
         // Is not localhost. Just register service worker
