@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import firebase from './firebase';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,3 +17,10 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 //serviceWorker.unregister();
 serviceWorker.register();
+
+
+//navigator.serviceWorker
+//    .register('/cuando-vence/build/firebase-messaging-sw2.js')
+//    .then((registration) => {
+//        firebase.messaging().useServiceWorker(registration);
+//    });

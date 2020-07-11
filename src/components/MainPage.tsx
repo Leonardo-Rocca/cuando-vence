@@ -3,6 +3,7 @@ import {AppBar, Button, createStyles, Theme, Typography} from "@material-ui/core
 import noti from '../nootificationWorker'
 import {makeStyles} from "@material-ui/core/styles";
 import {log, showNotification} from "../containers/AppNotification";
+import firebase from "../firebase";
 
     const useStyles = makeStyles((theme: Theme) =>
         createStyles({
@@ -18,12 +19,16 @@ import {log, showNotification} from "../containers/AppNotification";
         }),
     );
 async function askUserPermission() {
-    return await Notification.requestPermission().then(console.log);
+    return await Notification.requestPermission();
 }
 
 export default ()=>{
     const [notificationWorker,setWorker]:[Worker,any] = useState(new Worker(noti))
-    useEffect(()=>{askUserPermission()},[])
+    const [token,setToken] =useState('')
+    useEffect(()=>{
+        const messaging =  firebase.messaging();
+        messaging.getToken().then(setToken)
+        askUserPermission().then(() =>  messaging.getToken().then(setToken))},[])
     useEffect(()=>  setWorker(new Worker( noti))  ,[])
   //  notificationWorker.addEventListener('result',(msg)=>log())
 
@@ -64,6 +69,7 @@ export default ()=>{
         <Button variant="contained" color="primary" onClick={subscribeUser} > subscribe User</Button>
         <Button variant="contained" color="primary" onClick={()=>null} > Cancel suscription</Button>
 
+        token: {token}
     </>
 }
 
