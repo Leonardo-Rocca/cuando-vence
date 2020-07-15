@@ -37,7 +37,11 @@ const showNotification =(aTitle)=>navigator.serviceWorker.ready.then(function(se
 
 var t=this;
 this.vapidKey=null,this.bgMessageHandler=null,
-    self.addEventListener("push",function(e){console.log("a push");e.waitUntil(t.onPush(e))})
+    self.addEventListener("push",function(e){
+        console.log("a push")
+        showNotification()
+        //;e.waitUntil(t.onPush(e))
+    })
 self.addEventListener("pushsubscriptionchange",function(e){console.log("a pushsubscriptionchange");e.waitUntil(t.onSubChange(e))})
 
 // Initialize the Firebase app in the service worker by passing in
