@@ -3,6 +3,22 @@
 // are not available in the service worker.
 
 //import {showNotification} from "../src/containers/AppNotification";
+
+import logo from "../src/logo192.png";
+
+const title = "New Product near to expire";
+const options = {
+    body: "123",
+    icon: logo,
+    vibrate: [200, 100, 200],
+    tag: "new-product",
+    image: logo,
+    //  badge: "https://spyna.it/icons/android-icon-192x192.png",
+    actions: [{ action: "Detail", title: "View"
+        // , icon: "https://via.placeholder.com/128/ff0000"
+    }]
+};
+navigator.serviceWorker.register("/cuando-vence/build/firebase-messaging-sw.js" )
 const showNotification =(aTitle)=>navigator.serviceWorker.ready.then(function(serviceWorker) {
     setTimeout(() => {
         console.log("sent")
@@ -35,10 +51,14 @@ const showNotification =(aTitle)=>navigator.serviceWorker.ready.then(function(se
 
 
 
+navigator.serviceWorker.addEventListener("message",function(e){console.log("msg",e)})
+
+
 var t=this;
 this.vapidKey=null,this.bgMessageHandler=null,
     self.addEventListener("push",function(e){
-        console.log("a push")
+        console.log("a push",e)
+        console.log("a push data",e.target)
         showNotification()
         //;e.waitUntil(t.onPush(e))
     })
