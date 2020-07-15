@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/cuando-vence/build/precache-manifest.b103d43a056db47edc67927399b26950.js"
+  "/cuando-vence/build/precache-manifest.20cee405df89dd1748a4c6d1e92f2d9e.js"
 );
 
 self.addEventListener('message', (event) => {

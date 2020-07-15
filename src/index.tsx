@@ -8,7 +8,7 @@ import firebase from './firebase';
 
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker
-        .register('/cuando-vence/build/firebase-messaging-sw.js',{scope:"/cuando-vence/build/firebase-cloud-messaging-push-scope"})
+        .register('/cuando-vence/build/firebase-messaging-sw.js',{scope:"firebase-cloud-messaging-push-scope"})
         .then((registration) => {
             console.log("Registration successful, scope is:", registration.scope);
             alert("Registration successful, scope is:"+ registration.scope);
