@@ -8,15 +8,15 @@ import firebase from './firebase';
 
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker
-        .register('/cuando-vence/build/firebase-messaging-sw.js',{scope:"firebase-cloud-messaging-push-scope"})
+        .register( ' /cuando-vence/build/firebase-messaging-sw.js'/*,{scope:"firebase-cloud-messaging-push-scope"}*/)
         .then((registration) => {
             console.log("Registration successful, scope is:", registration.scope);
-            alert("Registration successful, scope is:"+ registration.scope);
-    //        firebase.messaging().useServiceWorker(registration);
+       //     alert("Registration successful, scope is:"+ registration.scope);
+            firebase.messaging().useServiceWorker(registration);
         })
         .catch(function (err) {
             console.log("Service worker registration failed, error:", err);
-            alert("Service worker registration failed, error:"+ err);
+        //    alert("Service worker registration failed, error:"+ err);
         });
 }
 
