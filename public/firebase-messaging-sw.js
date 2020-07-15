@@ -2,6 +2,8 @@
 // Note that you can only use Firebase Messaging here, other Firebase libraries
 // are not available in the service worker.
 // @ts-ignore
+import {showNotification} from "../src/containers/AppNotification";
+
 importScripts('https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js');
 // @ts-ignore
 //importScripts('/cuando-vence/build/my-firebase-messaging.js');
@@ -25,4 +27,27 @@ firebase.initializeApp({
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
 // @ts-ignore
-firebase.messaging();
+const messaging = firebase.messaging();
+messaging.setBackgroundMessageHandler(function(payload) {
+    const promiseChain = clients
+        .matchAll({
+            type: "window",
+            includeUncontrolled: true,
+        })
+        .then((windowClients) => {
+            for (let i = 0; i < windowClients.length; i++) {
+                const windowClient = windowClients[i];
+                windowClient.postMessage(payload);
+            }
+        })
+        .then(() => {
+            return registration.showNotification("my notification title");
+        });
+    return promiseChain;
+});
+self.addEventListener("notificationclick", function(event) {
+    console.log(event);
+    let notification = event.data.firebaseMessaging.payload.notification;
+    console.log(notification);
+    showNotification(notification.title)
+});

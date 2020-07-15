@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {AppBar, Button, createStyles, Theme, Typography} from "@material-ui/core";
-import noti from '../nootificationWorker'
 import {makeStyles} from "@material-ui/core/styles";
-import {log, showNotification} from "../containers/AppNotification";
 import firebase from "../firebase";
+
+let F_MESSAGING = firebase.messaging();
 
     const useStyles = makeStyles((theme: Theme) =>
         createStyles({
@@ -22,20 +22,25 @@ async function askUserPermission() {
     return await Notification.requestPermission();
 }
 
-export default ()=>{
-    const [notificationWorker,setWorker]:[Worker,any] = useState(new Worker(noti))
+export default ({firebase}:any)=>{
     const [token,setToken] =useState('')
     useEffect(()=>{
-        const messaging =  firebase.messaging();
-        messaging.getToken().then(setToken)
-        askUserPermission().then(() =>  messaging.getToken().then(setToken))},[])
-    useEffect(()=>  setWorker(new Worker( noti))  ,[])
-  //  notificationWorker.addEventListener('result',(msg)=>log())
+        const messaging =  F_MESSAGING;
+        askUserPermission().then(async function() {
+            const token = await messaging.getToken();
+            return token
+        }).then(setToken)
+            .catch(function(err) {
+            console.log("Unable to get permission to notify.", err);
+        });
+      //  messaging.getToken().then(setToken)
+
+        navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
+    },[])
 
     const classes = useStyles();
     let clickSendNotification = ()=> {
-//        navigator.serviceWorker.controller?.postMessage({opCode: 'message'})
-        notificationWorker.postMessage({type: "notify"});
+
     }
 //     clickSendNotification = ()=>console.log({type:"notify",w:navigator.serviceWorker.ready});
 
@@ -66,6 +71,7 @@ export default ()=>{
         <Button variant="contained" color="primary" onClick={clickSendNotification} > Show Notif after 3 seconds</Button>
         v13
 
+        <Button variant="outlined" color="primary" onClick={askUserPermission} > ask User Permission</Button>
         <Button variant="contained" color="primary" onClick={subscribeUser} > subscribe User</Button>
         <Button variant="contained" color="primary" onClick={()=>null} > Cancel suscription</Button>
 

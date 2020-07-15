@@ -5,9 +5,22 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from './firebase';
 
+
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+        .register('/firebase-messaging-sw.js')
+        .then((registration) => {
+            console.log("Registration successful, scope is:", registration.scope);
+    //        firebase.messaging().useServiceWorker(registration);
+        })
+        .catch(function (err) {
+            console.log("Service worker registration failed, error:", err);
+        });
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App firebase={firebase} />
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -16,11 +29,5 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 //serviceWorker.unregister();
-serviceWorker.register();
+//serviceWorker.register();
 
-
-//navigator.serviceWorker
-//    .register('/cuando-vence/build/firebase-messaging-sw2.js')
-//    .then((registration) => {
-//        firebase.messaging().useServiceWorker(registration);
-//    });

@@ -14,11 +14,11 @@ const options = {
 };
 
 
-export const showNotification =()=>navigator.serviceWorker.ready.then(function(serviceWorker) {
+export const showNotification =(aTitle?: string | undefined,)=>navigator.serviceWorker.ready.then(function(serviceWorker) {
     setTimeout(() => {
         console.log("sent")
 
-        serviceWorker.showNotification(title, options);
+        serviceWorker.showNotification(aTitle || title, options);
     }, 3000)
 });
 export const log=()=>        alert("sent")
