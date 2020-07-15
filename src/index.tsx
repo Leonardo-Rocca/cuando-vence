@@ -11,10 +11,12 @@ if ("serviceWorker" in navigator) {
         .register('/cuando-vence/build/firebase-messaging-sw.js')
         .then((registration) => {
             console.log("Registration successful, scope is:", registration.scope);
+            alert("Registration successful, scope is:"+ registration.scope);
     //        firebase.messaging().useServiceWorker(registration);
         })
         .catch(function (err) {
             console.log("Service worker registration failed, error:", err);
+            alert("Service worker registration failed, error:"+ err);
         });
 }
 
