@@ -26,7 +26,7 @@ function App({firebase}:any) {
             .catch(function (err) {
                 console.log("Service worker registration failed, error:", err);
                 //    alert("Service worker registration failed, error:"+ err);
-                setIsWorkerLoaded(true)
+               // setIsWorkerLoaded(true)
 
             });
     }
