@@ -20,7 +20,7 @@ const options = {
 const showNotification =(aTitle)=>    setTimeout(() => {
     console.log("sent")
 
-    self.showNotification(aTitle || title, options);
+    self.registration.showNotification(aTitle || title, options);
 }, 3000);
 
 //navigator.serviceWorker.ready.then(function(serviceWorker) {
