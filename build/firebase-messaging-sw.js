@@ -1,8 +1,15 @@
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here, other Firebase libraries
 // are not available in the service worker.
-// @ts-ignore
-import {showNotification} from "../src/containers/AppNotification";
+
+//import {showNotification} from "../src/containers/AppNotification";
+const showNotification =(aTitle)=>navigator.serviceWorker.ready.then(function(serviceWorker) {
+    setTimeout(() => {
+        console.log("sent")
+
+        serviceWorker.showNotification(aTitle || title, options);
+    }, 3000)
+});
 
 //importScripts('https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js');
 // @ts-ignore
