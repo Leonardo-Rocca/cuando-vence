@@ -1,8 +1,76 @@
-// Give the service worker access to Firebase Messaging.
-// Note that you can only use Firebase Messaging here, other Firebase libraries
-// are not available in the service worker.
+var PRECACHE = 'precache-v1';
+var RUNTIME = 'runtime';
 
-//import {showNotification} from "../src/containers/AppNotification";
+// list the files you want cached by the service worker
+PRECACHE_URLS = [
+    'index.html',
+    './',
+    'index.html?utm_source=homescreen',
+];
+
+// the rest below handles the installing and caching
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(PRECACHE).then(cache => cache.addAll(PRECACHE_URLS)).then(self.skipWaiting())
+    );
+});
+
+self.addEventListener('activate', event => {
+    const currentCaches = [PRECACHE, RUNTIME];
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+        }).then(cachesToDelete => {
+            return Promise.all(cachesToDelete.map(cacheToDelete => {
+                return caches.delete(cacheToDelete);
+            }));
+        }).then(() => self.clients.claim())
+    );
+});
+
+
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches.match(event.request)
+            .then(function(response) {
+                if (response) {
+                    return response;
+                }
+                var fetchRequest = event.request.clone();
+
+                return fetch(fetchRequest).then(
+                    function(response) {
+                        // Check if we received a valid response
+                        if(!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
+                        var responseToCache = response.clone();
+
+                        caches.open(RUNTIME)
+                            .then(function(cache) {
+                                cache.put(event.request, responseToCache);
+                            });
+
+                        return response;
+                    }
+                );
+            })
+    );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const title = "New Product near to expire";
 const options = {
@@ -108,3 +176,14 @@ self.addEventListener("notificationclick", function(event) {
         }));
     }
 });
+
+
+
+
+
+
+
+
+
+
+
