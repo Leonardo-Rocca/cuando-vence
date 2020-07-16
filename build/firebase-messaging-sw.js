@@ -7,25 +7,23 @@
 const title = "New Product near to expire";
 const options = {
     body: "123",
- //   icon: logo,
+    icon: '/cuando-vence/build/logo192.png',
     vibrate: [200, 100, 200],
     tag: "new-product",
  //   image: logo,
     //  badge: "https://spyna.it/icons/android-icon-192x192.png",
+    data:{url:'/'},
     actions: [{ action: "Detail", title: "View"
         // , icon: "https://via.placeholder.com/128/ff0000"
     }]
 };
 //navigator.serviceWorker.register("/cuando-vence/build/firebase-messaging-sw.js" )
-const showNotification =(aTitle)=>    setTimeout(() => {
+const showNotification =(aTitle,opt)=>    setTimeout(() => {
     console.log("sent")
 
-    self.registration.showNotification(aTitle || title, options);
+    self.registration.showNotification(aTitle || title, {...options,...opt});
 }, 3000);
 
-//navigator.serviceWorker.ready.then(function(serviceWorker) {
-//
-//});
 
 //importScripts('https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js');
 // @ts-ignore
@@ -49,19 +47,18 @@ const showNotification =(aTitle)=>    setTimeout(() => {
 //# sourceMappingURL=firebase-messaging.js.map
 
 
-
-
 self.addEventListener("message",function(e){console.log("msg",e)})
 
 
 var t=this;
-this.vapidKey=null,this.bgMessageHandler=null,
-    self.addEventListener("push",function(e){
+self.addEventListener("push",function(e){
         console.log("a push",e)
-        console.log("a push data",e.target)
-        showNotification()
+    console.log("a push data",e.data)
+    let {title,...options} = e.data.json().notification;
+        showNotification(title,options)
         //;e.waitUntil(t.onPush(e))
     })
+
 self.addEventListener("pushsubscriptionchange",function(e){console.log("a pushsubscriptionchange");e.waitUntil(t.onSubChange(e))})
 
 // Initialize the Firebase app in the service worker by passing in
@@ -101,8 +98,24 @@ messaging.setBackgroundMessageHandler(function(payload) {
     return promiseChain;
 });*/
 self.addEventListener("notificationclick", function(event) {
-    console.log(event);
-    let notification = event.data.firebaseMessaging.payload.notification;
+    console.log("click");
+    let notification = event?.data?.firebaseMessaging?.payload;
     console.log(notification);
-    showNotification(notification.title)
+    //showNotification(notification.title)
+    if (Notification.prototype.hasOwnProperty('data')) {
+        console.log('Using Data');
+        var url = event.notification.data.url;
+        event.waitUntil(clients.openWindow(url));
+    } else {
+        event.waitUntil(getIdb().get(KEY_VALUE_STORE_NAME,
+            event.notification.tag).then(function(url) {
+            // At the moment you cannot open third party URL's, a simple trick
+            // is to redirect to the desired URL from a URL on your domain
+            var redirectUrl = '/redirect.html?redirect=' +
+                url;
+            return clients.openWindow(redirectUrl);
+        }));
+    }
+
+
 });

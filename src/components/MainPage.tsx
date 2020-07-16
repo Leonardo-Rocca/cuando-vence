@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {AppBar, Button, createStyles, Theme, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import firebase from "../firebase";
+import {showNotification} from "../containers/AppNotification";
 
 let F_MESSAGING = firebase.messaging();
 
@@ -41,7 +42,7 @@ export default ({firebase}:any)=>{
 
     const classes = useStyles();
     let clickSendNotification = ()=> {
-
+        showNotification("asas")
     }
 //     clickSendNotification = ()=>console.log({type:"notify",w:navigator.serviceWorker.ready});
 
@@ -63,6 +64,16 @@ export default ({firebase}:any)=>{
         })
     }
 
+    let loadProducts=() => {
+        const db = firebase.firestore();
+        db.collection("products").get().then((querySnapshot: any) => {
+            querySnapshot.forEach((doc: { id: any; data: () => any; }) => {
+                console.log(`${doc.id} => `,doc.data());
+            });
+            console.log("snap", querySnapshot)
+        });
+    }
+
     return  <>
         <AppBar position="static"> <Typography variant="h6" className={classes.title} >
             Cuando vence
@@ -74,7 +85,8 @@ export default ({firebase}:any)=>{
 
         <Button variant="outlined" color="primary" onClick={askUserPermission} > ask User Permission</Button>
         <Button variant="contained" color="primary" onClick={subscribeUser} > subscribe User</Button>
-        <Button variant="contained" color="primary" onClick={()=>null} > Cancel suscription</Button>
+        <br />
+        <Button variant="outlined" color="primary" onClick={loadProducts} > Load data</Button>
 
         token: {token}
     </>
